@@ -142,11 +142,13 @@ app.layout = html.Div(children=[
             Output(component_id='plot3', component_property='children'),
             Output(component_id='plot4', component_property='children'),
             Output(component_id='plot5', component_property='children')],
-            Input(component_id='input-type', component_property='value'),
-            Input(component_id='input-year', component_property='value'), 
-            State("plot1", 'children'), State("plot2", "children"), 
-            State("plot3", "children"), State("plot4", "children"), 
-            State("plot5", "children"))
+            [Input(component_id='input-type', component_property='value'),
+             Input(component_id='input-year', component_property='value')],
+            #REVIEW4: Holding output state till user enters all the form information. In this case, it will be chart type and year
+            [State("plot1", 'children'), State("plot2", "children"),
+             State("plot3", "children"), State("plot4", "children"),
+             State("plot5", "children")])
+   
 # Add computation to callback function and return graph
 def get_graph(chart, year, children1, children2, c3, c4, c5):
       
@@ -162,7 +164,7 @@ def get_graph(chart, year, children1, children2, c3, c4, c5):
             
             # TASK5: Average flight time by reporting airline
             # Enter your code below. Make sure you have correct formatting.
-            line_fig = px.line(line_data, x='Month', y='Airtime', color='Reporting_Airline', title='Average monthly flight time (minutes) by airline')  
+            line_fig = px.line(line_data, x='Month', y='AirTime', color='Reporting_Airline', title='Average monthly flight time (minutes) by airline')    
             
             # Percentage of diverted airport landings per reporting airline
             pie_fig = px.pie(div_data, values='Flights', names='Reporting_Airline', title='% of flights by reporting airline')
